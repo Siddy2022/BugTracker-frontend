@@ -1,0 +1,190 @@
+<div class="container-fluid">
+
+  <div class="row"> 
+     <div class="col-12">
+ 
+         <nav class="navbar navbar-expand-lg navbar-dark bg-danger nav-border">
+             <a class="navbar-brand nav-brand title-1" href="#">BugTracker</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                </button>
+             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav  ml-auto">
+               
+                   <li>
+                     <input class="form-control bug-search" [(ngModel)]="bug" [placeholder]="placeholderText" aria-label="Search">
+                  </li>
+                   <li class="nav-item active">
+                     <a class="nav-link" [routerLink]="['/createBug']">New Bug+</a>
+                  </li>
+                  <li class="nav-item active">
+                         <a  class="nav-link" data-toggle="modal" data-target="#myModal1">My Bugs</a>
+                  </li>
+ 
+                  <li class="nav-item  active">
+                         <a  class="nav-link" data-toggle="modal" data-target="#myModal2">Other Bugs</a>
+                  </li>
+ 
+                  <li class="nav-item  active">
+                     <a  class="nav-link"  [routerLink]="['/all-bugs']">All Bugs</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" (click)="logout()">Logout</a>
+                  </li>
+               </ul>
+            </div>
+        </nav>
+     </div>
+ </div>
+ 
+ 
+ 
+ 
+   <!--Modal to show bugs repoted by me-->
+ 
+   <div id="myModal1" class="modal fade" role="dialog"  tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                   <div class="modal-header text-center text-white bg-danger">
+                       <h4 class="modal-title w-100 font-weight-bold">Bugs Reported by Me</h4>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+ 
+ 
+                   <div>
+ 
+                       <table class="table table-info">
+                           <thead>
+                           <tr>
+                               <th scope="col">Status</th>
+                               <th scope="col">Title</th>
+                               <th scope="col">Reporter</th>
+                               <th scope="col">Date</th>
+                           </tr>
+                           </thead>
+                           <tbody *ngFor="let bug of reportedBug">
+                           <tr style="cursor: pointer;" routerLink="/bugDetails/{{bug.bugId}}"  data-dismiss="modal">
+                               <td class="text-secondary"><b>{{bug.status}}</b></td>
+                               <td class="text-secondary"><b>{{bug.bugTitle}}</b></td>
+                               <td class="text-secondary"><b><span class="text-success">{{bug.reporterName}}</span></b></td>
+                               <td class="text-secondary"><b>{{bug.reportedOn|date}}</b></td>
+                           </tr>
+                           </tbody>
+                       </table>
+       
+                   </div>
+           
+           
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+               </div>
+           </div>
+   </div>
+   <div class="container" style="margin-top:5px">
+       <div class="row">
+           <div class="col-12 bg-secondary" style="border-radius:20px;">
+               <marquee style="color:white;font-size:20px;margin:2px">Welcome <span class="text-warning">{{fullName}}</span> to the world of developers.Enjoy the BugTracker app.</marquee>
+           </div>
+       </div>
+   </div>
+ 
+ 
+   <!--Modal to show bugs related to other users-->
+ 
+   <div id="myModal2" class="modal fade" role="dialog"  tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+           <div class="modal-content">
+               <div class="modal-header text-center bg-danger text-light">
+                   <h4 class="modal-title w-100 font-weight-bold">Other Bugs</h4>
+                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+               </div>
+ 
+ 
+               <div>
+ 
+                   <table class="table table-primary">
+                       <thead>
+                       <tr>
+                           <th scope="col">Status</th>
+                           <th scope="col">Title</th>
+                           <th scope="col">Reporter</th>
+                           <th scope="col">Date</th>
+                       </tr>
+                       </thead>
+                       <tbody *ngFor="let bug of otherUsersRealatedBug">
+                       <tr style="cursor: pointer;" routerLink="/bugDetails/{{bug.bugId}}"  data-dismiss="modal">
+                           <td>{{bug.status}}</td>
+                           <td><b>{{bug.bugTitle}}</b></td>
+                           <td><span class="text-success"><b>{{bug.reporterName}}</b></span></td>
+                           <td>{{bug.reportedOn|date}}</td>
+                       </tr>
+                       </tbody>
+                   </table>
+   
+               </div>
+ 
+ 
+           </div>
+       </div>
+   </div>
+ 
+ 
+ 
+ 
+     <div class="table-responsive col-md-12 aside1">
+         <div>
+ 
+               <p style="font-size:20px;margin-bottom:-5px;color:#1cd3a2"><span><b>Bugs Assigned to {{fullName}}</b></span> <p>
+               <table class="table table-info" style="border-radius:10px">
+                   <thead>
+                   <tr>
+                     <th scope="col">Status <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('status')"></i></th>
+                     <th scope="col">Title <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('bugTitle')"></i></th>
+                     <th scope="col">Reporter <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('reporterName')"></i></th>
+                     <th scope="col">Date <i class="fa fa-sort" style="cursor: pointer;" (click)="changeOrder('reportedOn')"></i></th>
+                   </tr>
+                 </thead>
+                 
+                 <tbody *ngFor="let bug of assignedBug | filter:'bugTitle,reporterName,status,reportedOn': bug | sortBy: sortOrder : field   | filterBy: filterName | paginate: { itemsPerPage: 5, currentPage: p }" >
+                 
+                   <tr  style="cursor: pointer;" routerLink="/bugDetails/{{bug.bugId}}">
+                     <td class="text-secondary"><b>{{bug.status}}</b></td>
+                     <td class="text-secondary" ><b>{{bug.bugTitle}}</b></td>
+                     <td class="text-secondary"><b>{{bug.reporterName}}</b></td>
+                     <td class="text-secondary"><b>{{bug.reportedOn|date:'medium'}}</b></td>
+                   </tr>
+                 </tbody>
+               </table>
+               <div class="text-center">
+               <pagination-controls  (pageChange)="p = $event" ></pagination-controls>
+               </div>
+ 
+ 
+ 
+         </div>
+ 
+ 
+ 
+ 
+ 
+ 
+     </div>
+ 
+ 
+   </div>
+ 
+ 
+ 
+ 
+ 
+ 

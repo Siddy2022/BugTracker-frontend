@@ -1,0 +1,84 @@
+
+
+.container-fluid{
+  height:100%;
+}
+
+
+
+.title-1
+{
+    
+    color:white;
+}
+
+
+
+
+.nav-border
+{
+    border-radius:0 0 10px 10px;
+    color: blue
+}
+
+.bg-danger {
+  background-color:#0000FF !important;
+}
+
+table {
+    width: 100%;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+
+  .header{
+    background-color: navajowhite;
+    color: white;
+    padding: 2%;
+    text-align: center;
+  }
+  .navbar{
+    cursor: pointer;
+    
+  }
+
+
+  .user{
+    background-color:green;
+    color:black;
+    padding:5%;
+    display:block;
+    width:100%;
+    font-size:1.2em;
+    text-align:center;
+    font-family:sans-serif;
+  }
+
+
+  .fasquare{
+    float: center;
+    margin-top:3%;
+  }
+  .fasquare:hover{
+    color:blue;
+    cursor:pointer;
+  }
+
+  .aside{
+    background:  black;
+    overflow:auto;
+    margin-top:2%;
+  }
+
+  .aside1{
+    overflow:auto;
+    margin-top:2%;
+  }
+
+  .box
+  {
+    height:100vh;
+  }
+
