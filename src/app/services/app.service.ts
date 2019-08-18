@@ -8,7 +8,7 @@ import { Cookie } from 'ng2-cookies';
 })
 export class AppService {
 
-  private url = 'http://api.bugtracker.gq/api/v1';
+  private url = 'http://localhost:3002/api/v1';
 
   constructor(
     public http: HttpClient
