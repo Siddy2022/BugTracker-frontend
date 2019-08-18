@@ -8,7 +8,7 @@ import * as io from 'socket.io-client';
 })
 export class SocketService {
 
-  public baseurl = "http://localhost:3002"
+  public baseurl = "http://api.bugtracker.gq"
   public socket;
 
 
